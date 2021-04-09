@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+  </head>  
+  <body ng-init="esMayor = true">
+    <label>
+      Nombre <input type="text" ng-model="nombre">
+    </label><br>
+    <label>
+      Apellido <input type="text" ng-model="apellido">
+    </label><br>
+    <button ng-click="nombre = 'Juan'; apellido = 'Perez'">
+      valor por deafult
+    </button>
+    <label>
+      Es mayor <input type="checkbox" ng-model="esMayor">
+    </label><br>
+    {{ nombre }} - {{ apellido }}<br>
+    Es mayor: <span ng-show="esMayor">Si</span> <span ng-hide="esMayor">No</span> (ng-hide/ng-show)<br>
+    Es mayor: <span ng-if="esMayor">Si</span> <span ng-if="!esMayor">No</span> (ng-if)<br>
+    
+    Seleccione una opcion
+    <select ng-model="opcionSeleccionada">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select><br>
+    <p ng-switch="opcionSeleccionada">
+      <span ng-switch-when="1">Uno</span>
+      <span ng-switch-when="2">Dos</span>
+      <span ng-switch-when="3">Tres</span>
+      <span ng-switch-when="4">Cuatro</span>
+      <span ng-switch-default>Selecione una opcion para ver el resultado</span>
+    </p>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', []);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Formularios</title>
+    <style>
+      form, input {
+        margin: 5px;
+      }
+      form.ng-submitted.ng-invalid,
+      form.ng-submitted input.ng-invalid {
+        border: 1px solid red;
+      }
+    </style>
+  </head>  
+  <body>
+    <section ng-controller="formularioController">
+      <form name="formulario" ng-submit="enviarDatos()" novalidate>
+        <input name="usuario" ng-model="usuario" type="text" required><br>
+        <div ng-if="formulario.usuario.$error.required">
+          ingresa un valor
+        </div>
+        <input name="clave" ng-model="clave" type="password"><br>
+        <button type="submit" ng-click="ngClcik()">
+          Enviar
+        </button>
+      </form>
+      <table>
+       <tr>
+        <td>Fue modificado</td>
+         <td>{{ formulario.$dirty }}</td>
+        </tr>
+       <tr>
+        <td>no fue modificado</td>
+         <td>{{ formulario.$pristine }}</td>
+        </tr>
+       <tr>
+       <tr>
+        <td>valido</td>
+         <td>{{ formulario.$valid }}</td>
+        </tr>
+       <tr>
+        <td>invalido</td>
+         <td>{{ formulario.$invalid }}</td>
+        </tr>
+       <tr>
+       <tr>
+        <td>Fue enviado</td>
+         <td>{{ formulario.$submitted }}</td>
+        </tr>
+      </table>
+      Campo usuario
+      <table>
+       <tr>
+        <td>Fue modificado</td>
+         <td>{{ formulario.usuario.$dirty }}</td>
+        </tr>
+       <tr>
+        <td>no fue modificado</td>
+         <td>{{ formulario.usuario.$pristine }}</td>
+        </tr>
+       <tr>
+       <tr>
+        <td>Fue tocado</td>
+         <td>{{ formulario.usuario.$touched}}</td>
+        </tr>
+       <tr>
+        <td>no fue tocado</td>
+         <td>{{ formulario.usuario.$untouched }}</td>
+        </tr>
+       <tr>
+       <tr>
+        <td>valido</td>
+         <td>{{ formulario.usuario.$valid }}</td>
+        </tr>
+       <tr>
+        <td>invalido</td>
+         <td>{{ formulario.usuario.$invalid }}</td>
+        </tr>
+       <tr>
+      </table>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+        .controller('formularioController', function($scope){
+        $scope.enviarDatos = function() {
+          $scope.usuario = '';
+          $scope.clave = '';
+          $scope.formulario.$setSubmitted(false);
+        }
+        $scope.ngClcik = function() {
+          //alert('click');
+        }
+      })
+    </script>
+  </body>
+</html><

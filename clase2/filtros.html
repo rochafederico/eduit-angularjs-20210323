@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Filtros</title>
+  </head>  
+  <body>
+    <!-- {{ 'valor' | filtro }}
+    {{ 'valor' | filtro: paramUno: paramdos ... }}
+    {{ 'valor' | filtro: paramUno | filtroDos: paramUno: paramdos ... }}-->
+  <table>
+    <thead>
+      <tr>
+        <th>Filtro</th>
+        <th>ejemplos</th>
+      </tr>
+    </thead>
+    <tbody ng-init="monto = 1234.5678; texto = 'Hola mundo!';fecha = '2021-10-25'">
+      <tr >
+        <td>currency</td>
+        <td>
+          {{monto}}<br>
+          {{ monto | currency }}}<br>
+          {{ monto | currency: 'AR$'}}<br>
+          {{ monto | currency: '$ ': 3}}
+        </td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td>
+          {{monto}}<br>
+          {{ monto | number }}<br>
+          {{ monto | number: 10}}
+        </td>
+      </tr>
+      <tr>
+        <td>date</td>
+        <td>
+          {{fecha}}<br>
+          {{ fecha | date }}<br>
+          {{ fecha | date: 'dd/MM/yyyy' }}<br>
+          {{ fecha | date: 'EEEE dd MMMM yyyy' }}<br>
+          {{fecha | date: 'short'}}
+        </td>
+      </tr>
+      <tr>
+        <td>lowercase</td>
+        <td>
+          {{texto}}<br>
+          {{ texto | lowercase}}
+        </td>
+      </tr>
+      <tr>
+        <td>uppercase</td>
+        <td>
+          {{texto}}<br>
+          {{ texto | uppercase }}
+        </td>
+      </tr>
+      <tr>
+        <td>date y uppercase</td>
+        <td>
+          {{fecha}}<br>
+          {{ fecha | date: 'EEEE dd MMMM yyyy' | uppercase }}
+        </td>
+      </tr>
+    </tbody>
+    </table>
+    <table ng-init="page=100">
+      <thead>
+        <tr>
+        <!--<td>Filtro: <input ng-model="filtroInput"></td>-->
+        <td>
+          Ciudad: <input ng-model="filtroCiudad">
+          </td>
+        <td>
+          Provincia: <input ng-model="filtroProvincia">
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ciudad in ciudades | filter: { cod_descripcion: filtroCiudad, pcia_descripcion: filtroProvincia } | limitTo: 10: (10 * page - 10) | orderBy: 'cod_descripcion': false ">
+          <td>{{ciudad.cod_descripcion}}</td>
+          <td>{{ciudad.pcia_descripcion}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      {{dato}}
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+        .run(function($rootScope, ciudades, $filter){
+          var filtroMayuscuula = $filter('uppercase');
+
+          $rootScope.dato = filtroMayuscuula("asdfaj sdhfa sdjfha sd");
+          $rootScope.ciudades = ciudades;
+        });
+    </script>
+    <script src="/ciudades.js"></script>
+  </body>
+</html>

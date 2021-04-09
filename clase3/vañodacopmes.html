@@ -1,0 +1,87 @@
+!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Formularios</title>
+    <style>
+      label {
+        display: block;
+      }
+      form, input {
+        margin: 5px;
+      }
+      form.ng-submitted.ng-invalid,
+      form.ng-submitted input.ng-invalid {
+        border: 1px solid red;
+      }
+    </style>
+  </head>  
+  <body>
+    <section ng-controller="formularioController">
+      <form name="formulario" ng-submit="enviarDatos()" novalidate>
+        <label>
+          Usuario:<br>
+          <input name="usuario" ng-model="usuario" type="text" required>
+        </label>
+        <label ng-init="esMayor = false">
+          Soy mayor de edad;
+          <input type="checkbox" ng-model="esMayor">
+        </label>
+        {{esMayor}}
+        <label>
+          Fecha de nacimiento:<br>
+          <input name="fecha" ng-model="fecha" type="date" min="2021-04-06" ng-required="esMayor">
+        </label>
+        <label>
+          Fecha desde<br>
+          <input name="fechaDesde" ng-model="fechaDesde" type="date" ng-max="fechaHasta | date : 'yyyy-MM-dd'" ng-required="esMayor">
+        </label>
+        <label>
+          Fecha hasta<br>
+          <input name="fechaHasta" ng-model="fechaHasta" type="date" ng-min="fechaDesde | date : 'yyyy-MM-dd'" ng-required="esMayor">
+        </label>
+        <label>
+          Sigue el patron, escribe 10 numeros
+          <input type="text" name="patron" ng-model="patron" required pattern="[0-9]{10,}" minlength="4">
+          <!--<div ng-if="formulario.patron.$error.required">
+            Ingrese un valor
+          </div>
+          <div ng-if="formulario.patron.$error.pattern">
+            No cumple el patro
+          </div>-->
+          <div ng-if="formulario.$submitted" ng-messages="formulario.patron.$error">
+            <span ng-message="minlength">Ingrese almenos un valor</span>
+            <span ng-message="required">Ingrese un formato correcto (ej. 1234567890)</span>
+          </div>
+          <!--<div ng-if="formulario.patron.$error.required">
+            Ingrese un valor
+          </div>
+          <div ng-if="formulario.patron.$error.pattern">
+            No cumple el patro
+          </div>-->
+        </label>
+        <div>
+          {{formulario.patron.$error | json}}
+        </div>
+        <button type="submit" ng-click="ngClcik()">
+          Enviar
+        </button>
+      </form>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/angular-messages.min.js"></script>
+    <script>
+      angular.module('eduit', ["ngMessages"])
+        .controller('formularioController', function($scope){
+        $scope.enviarDatos = function() {
+          $scope.usuario = '';
+          $scope.clave = '';
+          $scope.formulario.$setSubmitted(false);
+        }
+      })
+    </script>
+  </body>
+</html>

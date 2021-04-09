@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Directivas</title>
+    <style>
+      .user {
+        background-color: greenyellow;
+      }
+    </style>
+  </head>  
+  <body>
+    {{algoLocal}}<br>
+    {{algoGlobal}}
+    <main ng-controller="miController">
+      <button ng-click="algoGlobal = 'Algo nuevo global desde la vista'">
+        modificar global desde la vista
+      </button>
+      <button ng-click="modificarGlobal()">
+        modificar global desde el controller
+      </button>
+      <section>{{algoGlobal}}</section>
+      <section>{{algoLocal}}</section>
+    </main>
+    <aside>
+      Usando ng-repeat
+      <select >
+        <option ng-repeat="ciudad in ciudades" value="{{ciudad.cod}}">
+          {{ciudad.cod_descripcion}}
+        </option>
+      </select>
+      <br>
+      <br>
+      Usando ng-options
+      <select ng-model="ciudadSeleccionada" ng-options="ciudad.cod_descripcion for ciudad in ciudades"></select>
+      <br>
+      <select ng-model="ciudadSeleccionada"
+              ng-options="ciudad.cod_descripcion group by ciudad.pcia_descripcion for ciudad in ciudades">
+      </select>
+      <br>
+      
+      {{ciudadSeleccionada | json}}
+    </aside>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+        /*.config(['$rootScope', function($rootScope){
+          $rootScope.algoGlobal = 'Algo por aca!';
+        }])*/
+        .run(['$rootScope', 'ciudades', function($rootScope, ciudades){
+          $rootScope.algoGlobal = 'Algo por aca!';
+          $rootScope.ciudades = ciudades;
+        }])
+        .controller('miController', ['$rootScope', '$scope', function($rootScope, $scope) {
+          $scope.algoLocal = 'Algo local!';
+          $scope.modificarGlobal = function() {
+            $rootScope.algoGlobal = 'Algo por nuevo desde el controller';
+          }
+        }])
+    </script>
+    <script src="/ciudades.js"></script>
+  </body>
+</html>

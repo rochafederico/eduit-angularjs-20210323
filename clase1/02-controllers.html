@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+  </head>  
+  <body>
+    <header ng-controller="holaController">
+      Hola {{nombre}}
+      <button ng-click="cambiarNombre()">
+        Cambiar nombre
+      </button>
+    </header>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      //angular.module('eduit', []).controller().service().factory()
+      /*var eduitApp = angular.module('eduit', []);
+      eduitApp.controller()*/
+      
+    /*angular.module('eduit', []);
+      angular.module('eduit').controller('holaController', function($scope) {
+        $scope.nombre = "Juan";
+        $scope.cambiarNombre = function() {
+          $scope.nombre = "Pepe";
+        debugger
+        }
+      });*/
+    </script>
+    <script src="/app.js"></script>
+    <script src="controllers/hola.controller.js"></script>
+  </body>
+</html>

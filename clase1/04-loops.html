@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+  </head>  
+  <body ng-controller="listaController">
+    <b>Agrega un nombre</b><br>
+    <label>
+      Nombre <input ng-model="nuevoNombre">
+    </label><br>
+    <button ng-click="agregarNombre()">
+      Agregar
+    </button>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+<!--
+        <tr ng-repeat="nombre in nombres">
+          <td>{{nombre}}</td>
+        </tr>
+-->
+        <tr ng-repeat-start="nombre in nombres">
+          <td>{{nombre}}</td>
+          <td>{{ $index }}</td>
+          <td>{{ $first }}</td>
+          <td>{{ $middle }}</td>
+          <td>{{ $last }}</td>
+          <td>{{ $odd }}</td>
+          <td>
+            <button ng-click="borrarNombre($index)">
+              Borrar
+            </button>
+          </td>
+        </tr>
+        <tr ng-repeat-end>
+          <td colspan="2">------</td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular
+        .module('eduit', [])
+        .controller('listaController', function($scope){
+          $scope.nombres = ["Juan", "Pedro", "Valeria", "Ramiro"];
+          $scope.agregarNombre = function(nombre) {
+            $scope.nombres.push($scope.nuevoNombre);
+            $scope.nuevoNombre = '';
+          }
+          $scope.borrarNombre = function(index) {
+            $scope.nombres.splice(index, 1);
+          }
+        });
+    </script>
+  </body>
+</html>

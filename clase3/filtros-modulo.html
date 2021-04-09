@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Filtros personalizados</title>
+  </head>  
+  <body>
+    {{ 'Algo' | miFiltro }}<br>
+    <img ng-src="{{ 'tags/img_girl.jpg' | urlMultimedia}}"><br>
+    {{email}}
+    <ul>
+      <li ng-repeat="email in (emails | stringToArray)">
+      {{email}}
+      </li>
+    </ul>
+    {{emailsDos}}
+    <ul>
+      <li ng-repeat="email in (emailsDos | stringToArray: ';')">
+      {{email}}
+      </li>
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="modulo-filtros.js"></script>
+    <script>
+      angular.module('eduit', ['edu-it-filtros'])
+      .run(function($rootScope){
+        $rootScope.emails = "mail1@mail.com,mail2@mail.com,mail3@mail.com,mail4@mail.com,mail5@mail.com";
+        $rootScope.emailsDos = "mail1@mail.com;mail2@mail.com;mail3@mail.com;mail4@mail.com;mail5@mail.com";
+      })
+    </script>
+  </body>
+</html>

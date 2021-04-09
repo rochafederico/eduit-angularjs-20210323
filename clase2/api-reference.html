@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Directivas</title>
+  </head>  
+  <body>
+    <main>
+      <section>
+        <h1></h1>
+        <p></p>
+      </section>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      var persona = {
+        nombre: "",
+        apellido: "",
+        esAlumno: false,
+        edad: null
+      };
+      // var fede = { nombre: 'Federico' };
+      // var pepe = { nombre: fede.nombre };
+      
+      var pepe = angular.copy(persona);
+      pepe.nombre = "Pedro";
+      pepe.apeliido = "Perez";
+      
+      // var elemento =  document.querySelector('h1');
+      // elemento.innerText = "Hola Alumnos!";
+      // elemento.classList.add('clase-prueba');
+      
+      var elemento =  document.querySelector('main');
+      var elementoNG = angular.element(elemento);
+      elementoNG.find('h1').text('Hola mundo!');
+      elementoNG.addClass('otra-clase');
+    </script>
+  </body>
+</html>

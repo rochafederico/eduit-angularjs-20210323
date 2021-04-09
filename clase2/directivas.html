@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Directivas</title>
+    <style>
+      .user {
+        background-color: greenyellow;
+      }
+    </style>
+  </head>  
+  <body>
+    <!--
+<header ng-controller="userController" ng-style="{ backgroundColor: fondo }">
+      Hola {{user.nombre}} {{user.apellido}}
+    </header>
+-->
+    <header ng-controller="userController" ng-class="{ user: user.esProfe }">
+      Hola {{user.nombre}} {{user.apellido}}
+    </header>
+    <main ng-controller="inicioController">
+      <section>
+        <a ng-href="{{urlBase + imagen}}" download>Descargar imagen</a>
+        <img ng-src="{{urlBase + imagen}}"/>
+        <button ng-click="imagen = 'tags/smiley.gif'">
+          Cambiar imagen
+        </button>
+      </section>
+      <section>
+        <video controls>
+          <source ng-src="{{urlBase + 'html/mov_bbb.mp4'}}" type="video/mp4">
+        </video>
+      </section>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+        .constant('urlBaseMultimedia', 'https://www.w3schools.com/')
+        .controller('inicioController', function($scope, urlBaseMultimedia){
+          $scope.urlBase = urlBaseMultimedia;
+          $scope.imagen = 'tags/img_girl.jpg';
+        })
+        //.controller('userController', ["$scope", "urlBaseMultimedia", function(a, b){
+        //  debugger
+        //}]);
+      var userController = function(model, urlBase){
+        // debugger
+        model.user = {
+          nombre: 'Federico',
+          apellido: 'Rocha',
+          esProfe: true
+        }
+        if(model.user.esProfe){
+          model.fondo = '#1e88e5'
+        }
+        model.clase = "user";
+      }
+      userController.$inject = ["$scope", "urlBaseMultimedia"];
+      angular.module('eduit').controller('userController', userController);
+    </script>
+  </body>
+</html>
