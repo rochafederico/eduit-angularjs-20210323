@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Servicio $http de AngularJS</title>
+  </head>  
+  <body ng-controller="fabricaController">
+    <select ng-options="tipo for tipo in tiposDeVehiculos" ng-model="tipoSeleccionado"></select>
+    <button ng-click="crearVehiculo()">
+      Crear vehiculo
+    </button>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+      .factory('vehiculoFactory', ["$q", function($q){
+        var vehiculos = [];
+        vehiculos["monotciclo"] = {
+          ruedas: 1,
+          asientos: 1,
+          techo: false
+        };
+        vehiculos["moto"] = {
+          ruedas: 2,
+          asientos: 1,
+          techo: false
+        }
+        vehiculos["auto"] = {
+          ruedas: 4,
+          asientos: 4,
+          techo: true
+        }
+        debugger
+        return function(tipo) {
+          debugger
+          return angular.copy(vehiculos[tipo]);
+        }
+      }])
+      .controller("fabricaController", function($scope, vehiculoFactory){
+        $scope.tiposDeVehiculos = ["monotciclo", "moto", "auto"];
+        $scope.crearVehiculo = function() {
+          debugger
+          var resultado = vehiculoFactory($scope.tipoSeleccionado);
+          debugger
+        }
+      })
+      
+    </script>
+  </body>
+</html>

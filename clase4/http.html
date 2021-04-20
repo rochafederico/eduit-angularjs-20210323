@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Servicio $http de AngularJS</title>
+    <style>
+      section > button {
+        border: 0;
+        background: none;
+        text-decoration: underline;
+        color: blue;
+      }
+    </style>
+  </head>  
+  <body ng-controller="servicioHttpController">
+    <button ng-if="!hizoLaLlamda" ng-click="cargarPublicaciones()">
+      Cargar publicaciones
+    </button>
+    
+    <div ng-if="hizoLaLlamda">
+      <div ng-if="cargando">
+        Cargando publicaciones
+      </div>
+      <section ng-if="!cargando && !publicacionSeleccionada" ng-repeat="post in posts">
+        <button ng-click="seleccionarPost(post)">
+          {{post.title}}
+        </button>
+      </section>
+    </div>
+    <section ng-if="publicacionSeleccionada && !edicionPublicacion">
+      <h1>
+        {{publicacionSeleccionada.title}} <button type="button" ng-click="editarPuclicacion()">Editar</button>
+      </h1>
+      <a ng-href="mailto:{{publicacionUsuario.email}}">{{publicacionUsuario.name}}</a>
+      <p>
+        {{publicacionSeleccionada.body}}
+      </p>
+    </section>
+    <form name="publicacion" ng-if="publicacionSeleccionada && edicionPublicacion" ng-submit="guardarPublicacion()">
+      <div>
+        Titulo:<br>
+      <input name="title" ng-model="publicacionSeleccionada.title">
+      </div>
+      <div>
+        Cuerpo:<br>
+        <textarea name="title" ng-model="publicacionSeleccionada.body"></textarea>
+      </div>
+      <button type="submit">
+        Guardar
+      </button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+      .constant('apiUrlBase', 'http://jsonplaceholder.typicode.com')
+      .controller('servicioHttpController', ['$scope', '$http', 'apiUrlBase', function(model, $http, apiUrlBase) {
+        model.hizoLaLlamda = false;
+        model.publicacionSeleccionada = null;
+        model.cargarPublicaciones = function(){
+          model.hizoLaLlamda = true;
+          model.cargando = true;
+          $http({
+            mothod: 'GET',
+            url: apiUrlBase + '/posts'
+          }).then(function(data) {
+            return data.data
+          }).then(function(data){
+            model.posts = data;
+          }).finally(function(){
+            model.cargando = false;
+          })
+        }
+        
+        model.cagandoDetalle = false;
+        model.edicionPublicacion = false;
+        model.$watch('publicacionSeleccionada', function(newValue, oldValue){
+          if(newValue){
+            model.cagandoDetalle = true;
+            $http.get(apiUrlBase + '/users/' + newValue.userId)
+            .then(function(data){
+              model.publicacionUsuario = data.data;
+            })
+            .finally(function(){
+              model.cagandoDetalle = false;
+            });
+          }
+        })
+        model.seleccionarPost = function(post) {
+          model.publicacionSeleccionada = post;
+        }
+        model.editarPuclicacion = function(){
+          model.edicionPublicacion = true;
+        }
+        model.guardarPublicacion = function() {
+          $http.put(apiUrlBase + '/posts/' + model.publicacionSeleccionada.id, model.publicacionSeleccionada, { headers: { Authentication: 'Bearer aksjdfhakjsdh'}})
+        }
+      }]);
+      
+    </script>
+  </body>
+</html>

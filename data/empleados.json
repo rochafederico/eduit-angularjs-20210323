@@ -1,0 +1,42 @@
+[
+	{
+		"nombre": "Juan",
+		"apellido": "Perez",
+		"edad": 33,
+		"coaching": true,
+		"imagen": "imagenes/juan.png",
+		"planAmigo": 234.5664,
+		"sueldo": 23455.56,
+		"descripcion": "Si quieres demostrar que eres la persona idónea para ocupar tu puesto de trabajo es necesario que realices tus tareas con entusiasmo. Aunque muchas de las obligaciones laborales puedan parecer aburridas o monótonas, siempre existen formas de hacerlas más llevaderas. No dudes en plantearle tus proyectos e ideas a tu jefe."
+	},
+	{
+		"nombre": "Pedro",
+		"apellido": "Gomez",
+		"edad": 45,
+		"coaching": false,
+		"imagen": "imagenes/pedro.jpg",
+		"planAmigo": 345.678,
+		"sueldo": 34678.87,
+		"descripcion": "Si quieres demostrar que eres la persona idónea para ocupar tu puesto de trabajo es necesario que realices tus tareas con entusiasmo. Aunque muchas de las obligaciones laborales puedan parecer aburridas o monótonas, siempre existen formas de hacerlas más llevaderas. No dudes en plantearle tus proyectos e ideas a tu jefe."
+	},
+	{
+		"nombre": "Ana",
+		"apellido": "Garcia",
+		"edad": 45,
+		"coaching": true,
+		"imagen": "imagenes/ana.svg",
+		"planAmigo": 456.678,
+		"sueldo": 23451.43,
+		"descripcion": "Si quieres demostrar que eres la persona idónea para ocupar tu puesto de trabajo es necesario que realices tus tareas con entusiasmo. Aunque muchas de las obligaciones laborales puedan parecer aburridas o monótonas, siempre existen formas de hacerlas más llevaderas. No dudes en plantearle tus proyectos e ideas a tu jefe."
+	},
+	{
+		"nombre": "Maria",
+		"apellido": "Zamora",
+		"edad": 21,
+		"coaching": false,
+		"imagen": "imagenes/maria.png",
+		"planAmigo": 93.456,
+		"sueldo": 36000.12,
+		"descripcion": "Si quieres demostrar que eres la persona idónea para ocupar tu puesto de trabajo es necesario que realices tus tareas con entusiasmo. Aunque muchas de las obligaciones laborales puedan parecer aburridas o monótonas, siempre existen formas de hacerlas más llevaderas. No dudes en plantearle tus proyectos e ideas a tu jefe."
+	}
+]
