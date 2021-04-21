@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruteo angularjs</title>
+</head>
+
+<body>
+    <header>
+        <h1>Educacion IT</h1>
+    </header>
+    <!-- <ng-view></ng-voew> -->
+    <div ng-view></div>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="angular-route.min.js"></script>
+
+    <script>
+        angular.module('eduit', ['ngRoute'])
+            .config(function ($routeProvider) {
+                $routeProvider.when('/inicio', {
+                    template: '<h2>Inicio</h2><a href="#!/contacto">Contacto</a>'
+                }).when('/contact', {
+                    redirectTo: '/contacto' // function
+                }).when('/contacto', {
+                    controller: 'contactoController',
+                    templateUrl: '/clase5/pages/contacto/contactoTemplate.html',
+                    resolve: {
+                        empleados: function ($http) {
+                            return $http.get('/data/ciudades.json').then(function(data){
+                                return data.data;
+                            });
+                        }
+                    },
+                })
+                .when('/empleado/:id', {
+                    controller: 'contactoController',
+                    templateUrl: '/clase5/pages/contacto/contactoTemplate.html',
+                    resolve: {
+                        empleados: function ($http) {
+                            return $http.get('/data/ciudades.json').then(function(data){
+                                return data.data;
+                            });
+                        }
+                    },
+                })
+                .when('/empresa/:id-empresa/empleado/:id', {
+                    controller: 'contactoController',
+                    templateUrl: '/clase5/pages/contacto/contactoTemplate.html',
+                    resolve: {
+                        empleados: function ($http) {
+                            return $http.get('/data/ciudades.json').then(function(data){
+                                return data.data;
+                            });
+                        }
+                    },
+                })
+                .otherwise('/inicio')
+            })
+    </script>
+    <script src="pages/contacto/contactoController.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directiva</title>
+</head>
+<body ng-init="datoUsuario = 'sdasd'">
+    {{datoUsuario}}
+    <directiva-edu-it algo="esto" ng-model="datoUsuario">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo, earum! Asperiores nesciunt temporibus libero atque tempora iure aliquam mollitia doloribus debitis, quibusdam magnam autem omnis architecto sint explicabo ab quo.</p>
+    </directiva-edu-it>
+    <div directiva-edu-it>
+        <h1>Algo</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea dolorem quam eos nostrum magnam eligendi sit? Perspiciatis voluptate, nesciunt voluptas consequuntur totam eum beatae autem, tenetur magnam assumenda pariatur animi.</p>
+    </div>
+    <div class="directiva-edu-it"></div>
+    <!-- directive: directiva-edu-it -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+      .directive('directivaEduIt', ['$http', function($http){
+        return {
+            // template: '<h1>Educacion IT</h1>'
+            // template: function(a,b,c) {
+            //     debugger
+            //     return '<h1>Educacion IT</h1>'
+            // }
+            // templateUrl: string | function
+            templateUrl: '01-directivas-template.html',
+            // restric: "EA" // (E) Elemento, (A) Atributo, (C) Class o (M) Comentario
+            scope: {
+                otraCosa: '@algo',
+                ngModel: '='
+            },
+            // required: {
+            // }
+            // controller: string | function
+            controller: function($scope){
+// debugger
+            },
+            link: function(scope, element, controller, transclude){
+// debugger
+            },
+            transclude: true
+        };
+    }])
+    </script>
+</body>
+</html>

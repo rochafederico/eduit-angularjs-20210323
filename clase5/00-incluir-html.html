@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eduit">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/ng-template" id="/html-include.html">
+        <h2>
+            Hola
+        </h2>
+    </script>
+    <select ng-model="html">
+        <option value="/html-include.html">template script</option>
+        <option value="html-externo.html">template externo</option>
+    </select>
+{{html}}
+    <div ng-include="html"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      angular.module('eduit', [])
+    </script>
+</body>
+</html>
